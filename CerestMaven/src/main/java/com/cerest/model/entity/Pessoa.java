@@ -9,10 +9,13 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.ForeignKey;
@@ -45,9 +48,15 @@ private Date dataDeNascimento;
 @Temporal(javax.persistence.TemporalType.DATE)
 private Date DataDeCadastro;
 
+@OneToOne(mappedBy = "pessoa",fetch = FetchType.LAZY)
+@ForeignKey(name="EnderecoPessoa")
+private Endereco endereco;
+
+
 @ManyToOne(optional = false)
-@ForeignKey(name="PessoaSexo")
-private Pessoa pessoa;
+@ForeignKey(name="Pessoa_Sexo")
+@JoinColumn(name="IdSexo",referencedColumnName = "IdSexo")
+private Sexo sexo;
 
     public Pessoa() {
     }
@@ -106,6 +115,22 @@ private Pessoa pessoa;
 
     public void setDataDeCadastro(Date DataDeCadastro) {
         this.DataDeCadastro = DataDeCadastro;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     @Override

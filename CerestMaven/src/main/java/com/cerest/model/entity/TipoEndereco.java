@@ -4,7 +4,6 @@
  */
 package com.cerest.model.entity;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -21,29 +20,30 @@ import org.hibernate.annotations.ForeignKey;
  * @author moraes
  */
 @Entity
-@Table(name="sexo")
-public class Sexo implements Serializable{
+@Table(name="TipoEndereco")
+public class TipoEndereco {
     private static final long serialVersionUID=1L;
-    
     @Id
     @GeneratedValue
-    @Column(name="IdSexo",nullable = false)
-    private Integer id;
-    @Column(name="Descricao",nullable = false,length = 9)
+    @Column(name="TipoEndereco",nullable = false)
+    private Integer idTipoEndereco;
+    
+    @Column(name="Descricao",nullable = false,length = 80)
     private String descricao;
 
-    @OneToMany(mappedBy = "sexo",fetch = FetchType.LAZY)
-    @ForeignKey(name="Pessoa_Sexo")
-    private List<Pessoa> pessoas;
-    public Sexo() {
+    public TipoEndereco() {
+    }
+    
+    @OneToMany(mappedBy = "TipoEndereco",fetch = FetchType.LAZY)
+    @ForeignKey(name="TipoEnderecoEndereco")
+    private List<Endereco> enderecos;
+
+    public Integer getIdTipoEndereco() {
+        return idTipoEndereco;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoEndereco(Integer idTipoEndereco) {
+        this.idTipoEndereco = idTipoEndereco;
     }
 
     public String getDescricao() {
@@ -54,19 +54,19 @@ public class Sexo implements Serializable{
         this.descricao = descricao;
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.idTipoEndereco);
         return hash;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     @Override
@@ -77,12 +77,11 @@ public class Sexo implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Sexo other = (Sexo) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        final TipoEndereco other = (TipoEndereco) obj;
+        if (!Objects.equals(this.idTipoEndereco, other.idTipoEndereco)) {
             return false;
         }
         return true;
     }
+    
 }
-
-

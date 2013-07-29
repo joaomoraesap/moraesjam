@@ -4,12 +4,10 @@
  */
 package com.cerest.model.entity;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -21,51 +19,51 @@ import org.hibernate.annotations.ForeignKey;
  * @author moraes
  */
 @Entity
-@Table(name="sexo")
-public class Sexo implements Serializable{
+@Table
+public class Cidade {
     private static final long serialVersionUID=1L;
     
     @Id
     @GeneratedValue
-    @Column(name="IdSexo",nullable = false)
-    private Integer id;
-    @Column(name="Descricao",nullable = false,length = 9)
-    private String descricao;
+    @Column(name="IdCidade",nullable = false)
+    private Integer idcidade;
+    @Column(name="Nome",length = 80,nullable = false)
+    private String nome;
 
-    @OneToMany(mappedBy = "sexo",fetch = FetchType.LAZY)
-    @ForeignKey(name="Pessoa_Sexo")
-    private List<Pessoa> pessoas;
-    public Sexo() {
+    @OneToMany
+    @ForeignKey(name="CidadeEndereco")
+    private List<Endereco> enderecos;
+    public Cidade() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdcidade() {
+        return idcidade;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdcidade(Integer idcidade) {
+        this.idcidade = idcidade;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.idcidade);
         return hash;
     }
 
@@ -77,12 +75,14 @@ public class Sexo implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Sexo other = (Sexo) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        final Cidade other = (Cidade) obj;
+        if (!Objects.equals(this.idcidade, other.idcidade)) {
             return false;
         }
         return true;
     }
+    
+    
+    
+
 }
-
-

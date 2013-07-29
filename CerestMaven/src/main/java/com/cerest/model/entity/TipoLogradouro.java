@@ -21,29 +21,36 @@ import org.hibernate.annotations.ForeignKey;
  * @author moraes
  */
 @Entity
-@Table(name="sexo")
-public class Sexo implements Serializable{
+@Table(name="TipoLogradouro")
+public class TipoLogradouro implements Serializable{
     private static final long serialVersionUID=1L;
-    
     @Id
     @GeneratedValue
-    @Column(name="IdSexo",nullable = false)
-    private Integer id;
-    @Column(name="Descricao",nullable = false,length = 9)
+    @Column(name="idTipoLogradouro",nullable = false)
+    private Integer idTipoLogradouro;
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+    @Column(name="Descricao",nullable = false,length = 80)
     private String descricao;
-
-    @OneToMany(mappedBy = "sexo",fetch = FetchType.LAZY)
-    @ForeignKey(name="Pessoa_Sexo")
-    private List<Pessoa> pessoas;
-    public Sexo() {
+    
+    @OneToMany(mappedBy = "TipoLogradouro", fetch = FetchType.LAZY)
+    @ForeignKey(name="TipoLogradouroEndereco")
+    private List<Endereco> enderecos;
+    public TipoLogradouro() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoLogradouro() {
+        return idTipoLogradouro;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoLogradouro(Integer idTipoLogradouro) {
+        this.idTipoLogradouro = idTipoLogradouro;
     }
 
     public String getDescricao() {
@@ -54,18 +61,10 @@ public class Sexo implements Serializable{
         this.descricao = descricao;
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
-    
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.idTipoLogradouro);
         return hash;
     }
 
@@ -77,12 +76,12 @@ public class Sexo implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Sexo other = (Sexo) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        final TipoLogradouro other = (TipoLogradouro) obj;
+        if (!Objects.equals(this.idTipoLogradouro, other.idTipoLogradouro)) {
             return false;
         }
         return true;
     }
+    
+    
 }
-
-

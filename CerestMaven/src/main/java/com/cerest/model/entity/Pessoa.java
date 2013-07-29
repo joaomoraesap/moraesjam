@@ -12,15 +12,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.ForeignKey;
 
 /**
  *
  * @author moraes
  */
 @Entity
-@Table(name="Pessoa")
+@Table(name="pessoa")
 public class Pessoa implements Serializable{
 private static final long serialVersionUID=1L;
 
@@ -42,6 +44,10 @@ private Date dataDeNascimento;
 @Column(name="DataDeCadastro",nullable = false)
 @Temporal(javax.persistence.TemporalType.DATE)
 private Date DataDeCadastro;
+
+@ManyToOne(optional = false)
+@ForeignKey(name="PessoaSexo")
+private Pessoa pessoa;
 
     public Pessoa() {
     }

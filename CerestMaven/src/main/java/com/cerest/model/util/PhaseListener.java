@@ -2,14 +2,13 @@ package com.cerest.model.util;
 
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
 import org.hibernate.Session;
 
 /**
  *
  * @author moraes
  */
-public class PhseListener implements PhaseListener {
+public class PhaseListener implements javax.faces.event.PhaseListener{
 
     
     //antes da fase
